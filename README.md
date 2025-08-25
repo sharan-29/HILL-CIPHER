@@ -29,7 +29,54 @@ STEP-4: Multiply the two matrices to obtain the cipher text of length three.
 STEP-5: Combine all these groups to get the complete cipher text.
 
 ## PROGRAM 
+```python
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
+int key[3][3];
+
+void encrypt(char text[])
+{
+    int n = strlen(text);
+    for(int i=0;i<n;i+=3) {
+        int p[3]={0}, c[3]={0};
+        for(int j=0;j<3;j++) {
+            if(i+j<n) p[j] = toupper(text[i+j])-'A';
+            else p[j] = 'X'-'A'; 
+        }
+        for(int r=0;r<3;r++) {
+            for(int k=0;k<3;k++)
+                c[r] += key[r][k]*p[k];
+            c[r]%=26;
+        }
+        for(int j=0;j<3;j++)
+            printf("%c", c[j]+'A');
+    }
+}
+
+int main() {
+    char text[100];
+    printf("Enter plain text: ");
+    scanf("%s", text);
+
+    printf("Enter 3x3 key matrix (row-wise):\n");
+    for(int i=0;i<3;i++)
+        for(int j=0;j<3;j++)
+            scanf("%d",&key[i][j]);
+
+    printf("Cipher Text: ");
+    encrypt(text);
+
+    return 0;
+}
+```
 ## OUTPUT
 
+<img width="1917" height="873" alt="image" src="https://github.com/user-attachments/assets/c1abd630-2c8b-48d1-89e6-70aa3f74d672" />
+
+
 ## RESULT
+
+Thus The Program Has Been Successfully Initiated
+
